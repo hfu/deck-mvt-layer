@@ -1,8 +1,36 @@
 <!doctype html>
 <html>
 <head>
-<script src="https://unpkg.com/deck.gl@latest/dist.min.js">
+<meta charset='utf-8'>
+<link rel='stylesheet' href='style.css'>
 </head>
 <body>
+<script src="https://unpkg.com/deck.gl@latest/dist.min.js">
+</script>
+<script>
+const { DeckGL, MVTLayer } = deck
+const layer = new MVTLayer({
+  data: 'https://maps.gsi.go.jp/xyz/experimental_bvmap/{z}/{x}/{y}.pbf',
+  minZoom: 0,
+  maxZoom: 16,
+  getLineColor: [200, 173, 214], // #c8add6
+  getFillColor: [223, 207, 231], // #dfcfe7
+  lineWidthMinPixels: 1,
+  tileSize: 512
+})
+new DeckGL({
+  initialViewState: {
+    longitude: 139.767,
+    latitude: 35.681,
+    zoom: 14,
+    maxZoom: 22,
+    minZoom: 4,
+    pitch: 0,
+    bearing: 0
+  },
+  controller: true,
+  layers: [ layer ]
+})
+</script>
 </body>
 </html>
